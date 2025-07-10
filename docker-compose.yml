@@ -1,0 +1,50 @@
+
+version: '3.7'
+
+services:
+  wendsoft-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wendsoft-app
+    ports:
+      - "8000:80"
+    environment:
+      - APP_KEY=base64:2r9xD5bJCVkak2FYafZkqfBKm+u7IxdGjcYFhvPq3E8=
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=http://localhost:8000
+      - DB_HOST=db
+      - DB_DATABASE=wendsoft_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html
+
+  db:
+    image: mysql:5.7
+    container_name: wendsoft_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wendsoft_db
+    volumes:
+      - wendsoft-db-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: wendsoft-phpmyadmin
+    restart: always
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+
+volumes:
+  wendsoft-db-data:

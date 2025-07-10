@@ -1,0 +1,10 @@
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=base64:mIy1migLJcJVdHqfKYr7QbqI7xvsxmlLl37pTo1Q9So=
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_DATABASE=snipeit
+DB_USERNAME=snipeit
+DB_PASSWORD=snipeit
